@@ -24,7 +24,7 @@ const CompactCelebration = ({ onClose }) => {
             }}
         >
             <style>
-                {
+                {`
                     @keyframes congratsAnimation {
                         0% {
                             transform: translateY(0) scale(2);
@@ -58,7 +58,7 @@ const CompactCelebration = ({ onClose }) => {
                         transform: scale(1.1); /* Scale up on hover */
                         transition: transform 0.3s; /* Smooth transition */
                     }
-                }
+                `}
             </style>
 
             <Box display="flex" flexDirection="column" alignItems="center" justifyContent="flex-start" height="100%">
