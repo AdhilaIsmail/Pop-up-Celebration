@@ -38,8 +38,8 @@ const HomePage = () => {
       backgroundPosition: "center", // Centers the image
     }}
     >
-      <h1 style={{ color: "white", fontSize: "2rem", marginBottom: "20px" }}>
-        Welcome to Celebration App!
+      <h1 style={{ color: "white", fontSize: "2rem", marginBottom: "50px" }}>
+        Welcome to Celebration Pop-ups!
       </h1>
 
       {/* Full Page Celebration Button */}

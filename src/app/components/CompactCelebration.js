@@ -9,7 +9,7 @@ const CompactCelebration = ({ onClose }) => {
             onClose={onClose}
             PaperProps={{
                 style: {
-                    backgroundImage: url('bg3.jpg'), // Replace with your image URL
+                    backgroundImage: `url('bg3.jpg')`, // Replace with your image URL
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
