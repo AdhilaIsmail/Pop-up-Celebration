@@ -106,7 +106,7 @@ const LevelUpText = styled(Typography)(({ theme }) => ({
   `,
   fontFamily: "'Arial Black', sans-serif",
   fontWeight: "bold",
-  whiteSpace: "nowrap", // Ensure text stays on one line
+  whiteSpace: "nowrap",
   animation: "moveUp 1.5s forwards",
   "@keyframes moveUp": {
     "0%": {
@@ -119,7 +119,7 @@ const LevelUpText = styled(Typography)(({ theme }) => ({
     },
   },
   [theme.breakpoints.down("sm")]: {
-    fontSize: "2.5rem", // Reduced font size for mobile
+    fontSize: "2.5rem",
     "@keyframes moveUp": {
       "100%": {
         top: "10%",
@@ -129,7 +129,6 @@ const LevelUpText = styled(Typography)(({ theme }) => ({
     },
   },
 }));
-
 
 const ClaimButton = styled(Button)(({ theme }) => ({
   position: "absolute",
@@ -160,25 +159,46 @@ const ClaimButton = styled(Button)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     fontSize: "1rem",
     padding: "8px 16px",
-    bottom: "35%", // Moved higher for mobile view
+    bottom: "40%",
   },
 }));
 
-const LevelUpMessage = styled(Typography)(({ theme }) => ({
+const MessageContainer = styled(Box)(({ theme }) => ({
   position: "absolute",
-  bottom: "17%",
+  bottom: "5%",
   left: "50%",
-  transform: "translate(-50%, -50%)",
-  fontSize: "1rem",
+  transform: "translateX(-50%)",
+  width: "80%",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "10px",
+  [theme.breakpoints.down("sm")]: {
+    bottom: "2%",
+    width: "90%",
+  },
+}));
+
+const StyledMessage = styled(Typography)(({ theme }) => ({
   color: "#2e0b11",
   fontFamily: "'Arial Black', sans-serif",
   fontWeight: "bold",
-  textShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
   textAlign: "center",
+  textShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
   [theme.breakpoints.down("sm")]: {
     fontSize: "0.9rem",
-    bottom: "15%",
-    width: "90%",
+  },
+}));
+
+const SmallMessage = styled(Typography)(({ theme }) => ({
+  color: "#f5f0b0",
+  fontFamily: "'Arial Black', sans-serif",
+  fontWeight: "normal",
+  textAlign: "center",
+  textShadow: "0 1px 2px rgba(0, 0, 0, 0.2)",
+  fontSize: "0.8rem",
+  [theme.breakpoints.down("sm")]: {
+    fontSize: "0.7rem",
   },
 }));
 
@@ -269,56 +289,20 @@ const FullPageCelebration = ({ onClose }) => {
       {showClaimButton && (
         <>
           <ClaimButton variant="contained">Claim NFT Badge</ClaimButton>
-          <LevelUpMessage>
-            You've leveled up and earned a new badge!
-          </LevelUpMessage>
-          <Typography variant="body1" sx={{
-            position: "absolute",
-            bottom: "14%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            fontSize: "1rem",
-            color: "#2e0b11",
-            fontFamily: "'Arial Black', sans-serif",
-            fontWeight: "bold",
-            textAlign: "center",
-            textShadow: "0 2px 4px rgba(0, 0, 0, 0.3)",
-            width: "80%",
-          }}>
-            Claim your <span style={{ color: "#f5f0b0" }}>NFT badge</span> now, or retrieve it later from your Inventory.
-          </Typography>
-
-          <Typography variant="body1" sx={{
-            position: "absolute",
-            bottom: "5%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: "80%",
-            fontSize: ".8rem",
-            color: "#f5f0b0",
-            fontFamily: "'Arial Black', sans-serif",
-            fontWeight: "normal",
-            textAlign: "center",
-            textShadow: "0 1px 2px rgba(0, 0, 0, 0.2)",
-          }}>
-            To claim your new badge, you need to transfer your previous badge from your wallet for it to be burned in exchange for the new one.
-          </Typography>
-
-          <Typography variant="body1" sx={{
-            position: "absolute",
-            bottom: "2%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: "80%",
-            fontSize: ".8rem",
-            color: "#f5f0b0",
-            fontFamily: "'Arial Black', sans-serif",
-            fontWeight: "normal",
-            textAlign: "center",
-            textShadow: "0 1px 2px rgba(0, 0, 0, 0.2)",
-          }}>
-            If there's insufficient gas in your wallet, the transaction will be canceled. You can always visit your inventory and claim your badge at any time.
-          </Typography>
+          <MessageContainer>
+            <StyledMessage>
+              You've leveled up and earned a new badge!
+            </StyledMessage>
+            <StyledMessage>
+              Claim your <span style={{ color: "#f5f0b0" }}>NFT badge</span> now, or retrieve it later from your Inventory.
+            </StyledMessage>
+            <SmallMessage>
+              To claim your new badge, you need to transfer your previous badge from your wallet for it to be burned in exchange for the new one.
+            </SmallMessage>
+            <SmallMessage>
+              If there's insufficient gas in your wallet, the transaction will be canceled. You can always visit your inventory and claim your badge at any time.
+            </SmallMessage>
+          </MessageContainer>
         </>
       )}
     </FullPageContainer>
