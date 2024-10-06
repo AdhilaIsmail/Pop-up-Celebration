@@ -1,15 +1,35 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Dialog, Typography, Box, IconButton } from '@mui/material';
-import { css } from '@emotion/react';
 
 const CompactCelebration = ({ onClose }) => {
+    const audioRef = useRef(null);
+
+    useEffect(() => {
+        // Play the background music when the component mounts
+        audioRef.current = new Audio('audio.mp3'); // Replace with your music file path
+        audioRef.current.loop = true; // Loop the music
+        audioRef.current.play();
+
+        // Cleanup function to stop the music when the component unmounts
+        return () => {
+            audioRef.current.pause();
+            audioRef.current.currentTime = 0; // Reset music to the beginning
+        };
+    }, []);
+
+    const handleClose = () => {
+        audioRef.current.pause(); // Stop the music
+        audioRef.current.currentTime = 0; // Reset music to the beginning
+        onClose(); // Call the onClose prop function
+    };
+
     return (
         <Dialog
             open={true}
-            onClose={onClose}
+            onClose={handleClose}
             PaperProps={{
                 style: {
-                    backgroundImage: `url('bg3.jpg')`, // Replace with your image URL
+                    backgroundImage: 'url(bg3.jpg)', // Replace with your image URL
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
@@ -64,7 +84,7 @@ const CompactCelebration = ({ onClose }) => {
             <Box display="flex" flexDirection="column" alignItems="center" justifyContent="flex-start" height="100%">
                 {/* Close Image at the top right corner */}
                 <Box display="flex" justifyContent="flex-end" width="100%">
-                    <IconButton onClick={onClose} sx={{ padding: '0' }}>
+                    <IconButton onClick={handleClose} sx={{ padding: '0' }}>
                         <img src="/close.png" alt="Close" className="close-button" style={{ width: '60px', height: '50px' }} />
                     </IconButton>
                 </Box>

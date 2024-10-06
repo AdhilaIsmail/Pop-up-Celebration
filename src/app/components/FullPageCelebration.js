@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useRef} from "react";
 import { Box, Typography, LinearProgress, Slide, Button } from "@mui/material";
 import { styled } from "@mui/system";
+
 
 // Styles for the full-page container and badge
 const FullPageContainer = styled(Box)({
@@ -170,7 +171,7 @@ const FullPageCelebration = ({ onClose }) => {
   const [xpProgress, setXPProgress] = useState(0);
   const [showBadge, setShowBadge] = useState(false);
   const [showClaimButton, setShowClaimButton] = useState(false); 
-
+  const audioRef = useRef(null);
   // Simulate XP bar filling up
   useEffect(() => {
     const xpInterval = setInterval(() => {
@@ -199,8 +200,36 @@ const FullPageCelebration = ({ onClose }) => {
       clearTimeout(badgeDelay); 
     };
   }, []);
+  
+  // Play the celebration music
+  useEffect(() => {
+    // Create the audio object and store it in the ref
+    audioRef.current = new Audio('audio.mp3'); // Path to your sound file
+    audioRef.current.play();
+
+    return () => {
+      // Stop the music if the component unmounts
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+    };
+  }, []);
+
+  // Function to handle closing the celebration popup
+  const handleOnClose = () => {
+    // Stop the music when the close button is clicked
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0; // Reset the audio to the start
+    }
+    // Call the parent onClose handler to close the popup
+    onClose();
+  };
+
 
   return (
+    
     <FullPageContainer>
       {/* Close Button */}
       <CloseButton onClick={onClose}>
