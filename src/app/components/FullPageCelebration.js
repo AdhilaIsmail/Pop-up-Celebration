@@ -1,8 +1,6 @@
 import React, { useEffect, useState , useRef} from "react";
 import { Box, Typography, LinearProgress, Slide, Button } from "@mui/material";
 import { styled } from "@mui/system";
-
-
 // Styles for the full-page container and badge
 const FullPageContainer = styled(Box)({
   position: "relative",
@@ -17,6 +15,9 @@ const FullPageContainer = styled(Box)({
   justifyContent: "center",
   color: "#fff",
   textAlign: "center",
+  '@media (max-width: 600px)': { // For mobile devices
+    padding: "20px", // Add padding for smaller screens
+  },
 });
 
 // Badge container with flipping and scaling animation
@@ -35,6 +36,9 @@ const BadgeContainer = styled(Box)({
       transform: "translate(-50%, -50%) scale(1) rotateY(1080deg)",
     },
   },
+  '@media (max-width: 600px)': {
+    top: "40%", // Adjust badge position for mobile
+  },
 });
 
 // XP bar animation wrapper with brown background color
@@ -46,6 +50,10 @@ const XPBarContainer = styled(Box)({
   background: "transparent", 
   border: "6px solid #330b12", 
   borderRadius: 10, 
+  '@media (max-width: 600px)': {
+    width: "80%", // Wider XP bar on smaller screens
+    height: "30px", // Adjust bar height for smaller screens
+  },
 });
 
 // XP Bar with gradient filling
@@ -86,15 +94,15 @@ const LevelUpText = styled(Typography)(({ theme }) => ({
   backgroundClip: "text",
   WebkitBackgroundClip: "text", 
   color: "transparent", 
-  textShadow:`
-    0 1px 2px rgba(0, 0, 0, 0.4),  /* Deeper shadow for depth */
-    0 2px 4px rgba(255, 215, 0, 0.2), /* Soft golden glow */
-    0 3px 6px rgba(255, 223, 0, 0.2), /* Another golden glow */
-    0 -2px 4px rgba(255, 255, 255, 0.2), /* Highlight on top for shine */
-    0 4px 8px rgba(255, 255, 255, 0.2), /* Soft highlight at bottom for polish */
-    0 6px 12px rgba(255, 200, 0, 0.3), /* Stronger shine */
-    0 8px 16px rgba(255, 215, 0, 0.2), /* Additional reflective glow */
-    0 10px 20px rgba(255, 215, 0, 0.3)  /* Final shiny reflection */
+  textShadow: `
+    0 1px 2px rgba(0, 0, 0, 0.4),  
+    0 2px 4px rgba(255, 215, 0, 0.2), 
+    0 3px 6px rgba(255, 223, 0, 0.2), 
+    0 -2px 4px rgba(255, 255, 255, 0.2), 
+    0 4px 8px rgba(255, 255, 255, 0.2), 
+    0 6px 12px rgba(255, 200, 0, 0.3), 
+    0 8px 16px rgba(255, 215, 0, 0.2), 
+    0 10px 20px rgba(255, 215, 0, 0.3) 
   `,
   fontFamily: "'Arial Black', sans-serif", 
   fontWeight: "bold", 
@@ -108,6 +116,10 @@ const LevelUpText = styled(Typography)(({ theme }) => ({
       fontSize: "4rem", 
       transform: "translate(-50%, -50%) scale(1)", 
     },
+  },
+  '@media (max-width: 600px)': {
+    fontSize: "3rem", // Smaller font size on mobile
+    top: "40%", // Adjust top positioning for mobile
   },
 }));
 
@@ -147,10 +159,14 @@ const ClaimButton = styled(Button)({
       transform: "scale(1)", 
     },
   },
-
-  "&:hover": {
+  '&:hover': {
     background: "linear-gradient(to bottom, #FF8C00, #FF6347)",
     transform: "scale(1.05)", 
+  },
+  '@media (max-width: 600px)': {
+    padding: "5px 15px", // Adjust padding on mobile
+    fontSize: "1rem", // Smaller font size for mobile
+    bottom: "20%", // Adjust position
   },
 });
 
