@@ -106,6 +106,7 @@ const LevelUpText = styled(Typography)(({ theme }) => ({
   `,
   fontFamily: "'Arial Black', sans-serif",
   fontWeight: "bold",
+  whiteSpace: "nowrap", // Ensure text stays on one line
   animation: "moveUp 1.5s forwards",
   "@keyframes moveUp": {
     "0%": {
@@ -118,7 +119,7 @@ const LevelUpText = styled(Typography)(({ theme }) => ({
     },
   },
   [theme.breakpoints.down("sm")]: {
-    fontSize: "3rem",
+    fontSize: "2.5rem", // Reduced font size for mobile
     "@keyframes moveUp": {
       "100%": {
         top: "10%",
@@ -128,6 +129,7 @@ const LevelUpText = styled(Typography)(({ theme }) => ({
     },
   },
 }));
+
 
 const ClaimButton = styled(Button)(({ theme }) => ({
   position: "absolute",
@@ -158,7 +160,7 @@ const ClaimButton = styled(Button)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     fontSize: "1rem",
     padding: "8px 16px",
-    bottom: "20%",
+    bottom: "35%", // Moved higher for mobile view
   },
 }));
 
