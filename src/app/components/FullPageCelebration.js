@@ -159,7 +159,7 @@ const ClaimButton = styled(Button)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     fontSize: "1rem",
     padding: "8px 16px",
-    bottom: "40%",
+    bottom: "33%",
   },
 }));
 
@@ -174,7 +174,7 @@ const MessageContainer = styled(Box)(({ theme }) => ({
   alignItems: "center",
   gap: "10px",
   [theme.breakpoints.down("sm")]: {
-    bottom: "2%",
+    bottom: "4%",
     width: "90%",
   },
 }));
