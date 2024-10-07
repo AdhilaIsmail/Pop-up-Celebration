@@ -57,6 +57,17 @@ const XPBarContainer = styled(Box)(({ theme }) => ({
   },
 }));
 
+const XPLabelContainer = styled(Box)(({ theme }) => ({
+  position: "absolute",
+  bottom: "42%",
+  width: "60%",
+  display: "flex",
+  justifyContent: "space-between",
+  color: "#f5f0b0",
+  fontFamily: "'Arial Black', sans-serif",
+  fontWeight: "bold",
+}));
+
 const GradientXPBar = styled(LinearProgress)(({ theme }) => ({
   height: "100%",
   borderRadius: 10,
@@ -69,8 +80,8 @@ const CloseButton = styled(Box)(({ theme }) => ({
   position: "absolute",
   top: "20px",
   right: "16px",
-  width: "70px",
-  height: "70px",
+  width: "50px",
+  height: "50px",
   cursor: "pointer",
   "&:hover img": {
     transform: "scale(1.2)",
@@ -204,29 +215,34 @@ const SmallMessage = styled(Typography)(({ theme }) => ({
 
 const FullPageCelebration = ({ onClose }) => {
   const [xpProgress, setXPProgress] = useState(0);
+  const [currentXP, setCurrentXP] = useState(34000); // Start at 34000 XP
   const [showBadge, setShowBadge] = useState(false);
   const [showClaimButton, setShowClaimButton] = useState(false);
   const audioRef = useRef(null);
   const [audioPlayed, setAudioPlayed] = useState(false);
+
   
 
   useEffect(() => {
-    const xpInterval = setInterval(() => {
-      setXPProgress((oldProgress) => {
-        if (oldProgress >= 100) {
-          clearInterval(xpInterval);
-          setTimeout(() => setShowClaimButton(true), 300);
-          return 100;
-        }
-        return oldProgress + 5;
-      });
-    }, 100);
+      const xpInterval = setInterval(() => {
+        setXPProgress((oldProgress) => {
+          if (oldProgress >= 100) {
+            clearInterval(xpInterval);
+            setTimeout(() => setShowClaimButton(true), 300);
+            return 100;
+          }
+          const newProgress = oldProgress + 4;
+          // Calculate new XP based on progress
+          setCurrentXP(34000 + (newProgress / 100) * (50000 - 34000)); // Update XP based on progress
+          return newProgress;
+        });
+      }, 100);
 
-    return () => {
-      clearInterval(xpInterval);
-    };
-  }, []);
-
+      return () => {
+        clearInterval(xpInterval);
+      };
+    }, []);
+    
   useEffect(() => {
     const badgeDelay = setTimeout(() => {
       setShowBadge(true);
@@ -285,9 +301,18 @@ const FullPageCelebration = ({ onClose }) => {
         </Slide>
       )}
 
+
+      {/* XP Label Container */}
+      <XPLabelContainer>
+        <Typography style={{ color: "orange" }}>XP: {Math.round(currentXP)}</Typography>
+        <Typography style={{ color: "white" }}>50000</Typography>
+      </XPLabelContainer>
+
       <XPBarContainer>
         <GradientXPBar variant="determinate" value={xpProgress} />
       </XPBarContainer>
+
+      
 
       {showClaimButton && (
         <>

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import FullPageCelebration from "./components/FullPageCelebration";
 import CompactCelebration from "./components/CompactCelebration";
 import { Dialog } from "@mui/material";
+import Head from "next/head"; 
 
 const HomePage = () => {
   const [showFullPage, setShowFullPage] = useState(false);
@@ -13,7 +14,7 @@ const HomePage = () => {
     setShowFullPage(true);
     setTimeout(() => {
       setShowFullPage(false);
-    }, 30000); // Automatically close after 30 seconds
+    },30000); // Automatically close after 30 seconds
   };
 
   const triggerCompactCelebration = () => {
@@ -38,6 +39,12 @@ const HomePage = () => {
       backgroundPosition: "center", // Centers the image
     }}
     >
+      <Head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Bungee&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
       <h1 style={{ color: "white", fontSize: "2rem", marginBottom: "50px" }}>
         Welcome to Celebration Pop-ups!
       </h1>
