@@ -66,6 +66,9 @@ const XPLabelContainer = styled(Box)(({ theme }) => ({
   color: "#f5f0b0",
   fontFamily: "'Arial Black', sans-serif",
   fontWeight: "bold",
+  [theme.breakpoints.down("sm")]: {
+    bottom: "50%", // Move higher on mobile view
+  },
 }));
 
 const GradientXPBar = styled(LinearProgress)(({ theme }) => ({
@@ -170,7 +173,7 @@ const ClaimButton = styled(Button)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     fontSize: "1rem",
     padding: "8px 16px",
-    bottom: "35%",
+    bottom: "20%",// Move lower on mobile view
   },
 }));
 
@@ -232,7 +235,7 @@ const FullPageCelebration = ({ onClose }) => {
             return 100;
           }
           const newProgress = oldProgress + 4;
-          // Calculate new XP based on progress
+         
           setCurrentXP(34000 + (newProgress / 100) * (50000 - 34000)); // Update XP based on progress
           return newProgress;
         });
