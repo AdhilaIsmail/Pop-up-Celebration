@@ -42,16 +42,16 @@ const CompactCelebration = ({ onClose }) => {
                     margin: 'auto',
                     display:'flex',
                     flexDirection:'column',
-                    justifyContent:'flex-start',
+                    justifyContent:'center',
                 },
             }}
         >
             <style>
                 {`
                     @keyframes congratsAnimation {
-                        0% { transform: translateY(0) scale(2); opacity: 0; }
+                        0% { transform: scale(2); opacity: 0; }
                         50% { opacity: 1; }
-                        100% { transform: translateY(-50px) scale(1); opacity: 1; }
+                        100% { transform: scale(1); opacity: 1; }
                     }
                     @keyframes fadeInRewardsText {
                         0% { opacity: 0; }
@@ -65,16 +65,18 @@ const CompactCelebration = ({ onClose }) => {
                         transform: scale(1.1);
                         transition: transform 0.3s;
                     }
+                
                 `}
             </style>
 
-            <Box display="flex" flexDirection="column" alignItems="center" justifyContent="flex-start" height="100%">
+            <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" height="100%"  position="relative">
                 <Box display="flex" justifyContent="flex-end" width="100%">
-                    <IconButton onClick={handleClose} sx={{ padding: '0' }}>
+                    <IconButton onClick={handleClose} sx={{ position:'absolute',top: isMobile? '10px': '20px', right: isMobile? '10px':'20px' , padding: '0' }}>
                         <img src="/close.png" alt="Close" className="close-button" style={{ width: isMobile ? '40px' : '60px', height: isMobile ? '30px' : '50px' }} />
                     </IconButton>
                 </Box>
 
+                
                 <Typography
                     variant={isMobile ? "h4" : "h3"}
                     sx={{
@@ -88,7 +90,7 @@ const CompactCelebration = ({ onClose }) => {
                             md: '2.2rem',
                             lg: '2.5rem',
                         },
-                        fontWeight: 'bold',
+                        fontWeight: 700, // This ensures bold text on all devices
                         textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
                     }}
                 >
@@ -142,7 +144,7 @@ const CompactCelebration = ({ onClose }) => {
                     You have gained:
                 </Typography>
 
-                <Box display="flex" justifyContent="center" alignItems="center" marginTop={isMobile ? "10px" : "20px"}>
+                <Box display="flex" justifyContent="center" alignItems="center" mt={isMobile ? 2 : 4}>
                     <Box position="relative" marginRight={isMobile ? "10px" : "20px"}>
                         <img
                             src="/reward1.jpeg"
