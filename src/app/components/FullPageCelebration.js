@@ -67,7 +67,7 @@ const XPLabelContainer = styled(Box)(({ theme }) => ({
   fontFamily: "'Arial Black', sans-serif",
   fontWeight: "bold",
   [theme.breakpoints.down("sm")]: {
-    bottom: "50%", // Move higher on mobile view
+    bottom: "44%", // Move higher on mobile view50
   },
 }));
 
@@ -173,7 +173,7 @@ const ClaimButton = styled(Button)(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     fontSize: "1rem",
     padding: "8px 16px",
-    bottom: "20%",// Move lower on mobile view
+    bottom: "30%",// Move lower on mobile view20
   },
 }));
 
