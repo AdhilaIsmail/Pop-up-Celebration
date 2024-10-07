@@ -1,26 +1,26 @@
 import React, { useEffect, useRef } from 'react';
-import { Dialog, Typography, Box, IconButton } from '@mui/material';
+import { Dialog, Typography, Box, IconButton, useMediaQuery, useTheme } from '@mui/material';
 
 const CompactCelebration = ({ onClose }) => {
     const audioRef = useRef(null);
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     useEffect(() => {
-        // Play the background music when the component mounts
-        audioRef.current = new Audio('audio.mp3'); // Replace with your music file path
-        audioRef.current.loop = true; // Loop the music
+        audioRef.current = new Audio('audio.mp3');
+        audioRef.current.loop = true;
         audioRef.current.play();
 
-        // Cleanup function to stop the music when the component unmounts
         return () => {
             audioRef.current.pause();
-            audioRef.current.currentTime = 0; // Reset music to the beginning
+            audioRef.current.currentTime = 0;
         };
     }, []);
 
     const handleClose = () => {
-        audioRef.current.pause(); // Stop the music
-        audioRef.current.currentTime = 0; // Reset music to the beginning
-        onClose(); // Call the onClose prop function
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+        onClose();
     };
 
     return (
@@ -29,162 +29,140 @@ const CompactCelebration = ({ onClose }) => {
             onClose={handleClose}
             PaperProps={{
                 style: {
-                    backgroundImage: 'url(bg3.jpg)', // Replace with your image URL
+                    backgroundImage: 'url(bg3.jpg)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
                     borderRadius: '10px',
-                    padding: '20px',
-                    width: '80%', // Increased width for the compact pop-up
-                    maxWidth: '800px', // Ensure it doesn't overflow the viewport
-                    height: '80%', // Increased height for the pop-up
-                    maxHeight: '600px', // Set a maximum height for better display
-                    margin: 'auto', // Center the pop-up
+                    padding: isMobile ? '10px' : '20px',
+                    width: isMobile ? '90%' : '80%',
+                    maxWidth: '800px',
+                    height: isMobile ? '90%' : '80%',
+                    maxHeight: '600px',
+                    margin: 'auto',
                 },
             }}
         >
             <style>
                 {`
                     @keyframes congratsAnimation {
-                        0% {
-                            transform: translateY(0) scale(2);
-                            opacity: 0;
-                        }
-                        50% {
-                            opacity: 1;
-                        }
-                        100% {
-                            transform: translateY(-50px) scale(1);
-                            opacity: 1;
-                        }
+                        0% { transform: translateY(0) scale(2); opacity: 0; }
+                        50% { opacity: 1; }
+                        100% { transform: translateY(-50px) scale(1); opacity: 1; }
                     }
                     @keyframes fadeInRewardsText {
-                        0% {
-                            opacity: 0;
-                        }
-                        100% {
-                            opacity: 1;
-                        }
+                        0% { opacity: 0; }
+                        100% { opacity: 1; }
                     }
                     @keyframes fadeInImage {
-                        0% {
-                            opacity: 0;
-                        }
-                        100% {
-                            opacity: 1;
-                        }
+                        0% { opacity: 0; }
+                        100% { opacity: 1; }
                     }
                     .close-button:hover {
-                        transform: scale(1.1); /* Scale up on hover */
-                        transition: transform 0.3s; /* Smooth transition */
+                        transform: scale(1.1);
+                        transition: transform 0.3s;
                     }
                 `}
             </style>
 
             <Box display="flex" flexDirection="column" alignItems="center" justifyContent="flex-start" height="100%">
-                {/* Close Image at the top right corner */}
                 <Box display="flex" justifyContent="flex-end" width="100%">
                     <IconButton onClick={handleClose} sx={{ padding: '0' }}>
-                        <img src="/close.png" alt="Close" className="close-button" style={{ width: '60px', height: '50px' }} />
+                        <img src="/close.png" alt="Close" className="close-button" style={{ width: isMobile ? '40px' : '60px', height: isMobile ? '30px' : '50px' }} />
                     </IconButton>
                 </Box>
 
-                {/* Congratulations Text with animation */}
                 <Typography
-                    variant="h3"
+                    variant={isMobile ? "h4" : "h3"}
                     sx={{
                         color: '#FFD700',
                         marginBottom: '0px',
-                        marginTop: '20px', // Move text closer to the top of the popup
+                        marginTop: isMobile ? '10px' : '20px',
                         textAlign: 'center',
                         animation: 'congratsAnimation 1s forwards',
+                        fontSize: isMobile ? '1.8rem' : '2.5rem',
                     }}
                 >
                     Congratulations!
                 </Typography>
 
-                {/* Command completed text with delayed appearance and fade-in animation */}
                 <Typography
                     variant="body1"
                     sx={{
                         color: '#FFD700',
-                        fontSize: '1.3rem',
-                        marginTop: '-35px', // Reduced gap between "CONGRATULATIONS!" and this text
+                        fontSize: isMobile ? '1rem' : '1.3rem',
+                        marginTop: isMobile ? '-20px' : '-35px',
                         textAlign: 'center',
                         animation: 'fadeInRewardsText 0.5s forwards',
-                        animationDelay: '1s', // Delay to appear after "Congratulations!" has animated
-                        opacity: 0, // Initially hidden
+                        animationDelay: '1s',
+                        opacity: 0,
                     }}
                 >
                     Command completed successfully.
                 </Typography>
 
-                {/* New line for rewards explanation with the same fade-in animation */}
                 <Typography
                     variant="body2"
                     sx={{
                         color: '#edda95',
-                        marginTop: '10px', // Spacing below the previous line
+                        marginTop: '10px',
                         textAlign: 'center',
-                        padding: '15px',
-                        fontSize: '1.1rem',
+                        padding: isMobile ? '10px' : '15px',
+                        fontSize: isMobile ? '0.9rem' : '1.1rem',
                         animation: 'fadeInRewardsText 0.5s forwards',
-                        animationDelay: '2s', // Delay to appear after the previous line
-                        opacity: 0, // Initially hidden
+                        animationDelay: '2s',
+                        opacity: 0,
                     }}
                 >
                     You have successfully completed a command! Here are your well-earned rewards. 
                     Keep exploring the Command Center for even more exciting missions and bigger rewards!
                 </Typography>
 
-                {/* New line for rewards explanation with the same fade-in animation */}
                 <Typography
                     variant="body2"
                     sx={{
                         color: '#edda95',
-                        marginTop: '45px', // Spacing below the previous line
+                        marginTop: isMobile ? '20px' : '45px',
                         textAlign: 'center',
                         padding: '0px',
-                        fontSize: '1.1rem',
+                        fontSize: isMobile ? '0.9rem' : '1.1rem',
                         animation: 'fadeInRewardsText 0.5s forwards',
-                        animationDelay: '2s', // Delay to appear after the previous line
-                        opacity: 0, // Initially hidden
+                        animationDelay: '2s',
+                        opacity: 0,
                     }}
                 >
                     You have gained:
                 </Typography>
 
-                {/* Container for images */}
-                <Box display="flex" justifyContent="center" alignItems="center" marginTop="20px">
-                    {/* First Image with Label */}
-                    <Box position="relative" marginRight="20px">
+                <Box display="flex" justifyContent="center" alignItems="center" marginTop={isMobile ? "10px" : "20px"}>
+                    <Box position="relative" marginRight={isMobile ? "10px" : "20px"}>
                         <img
                             src="/reward1.jpeg"
                             alt="Reward 1"
                             style={{
-                                width: '100px',
-                                height: '100px',
-                                border: '5px solid #FFD700', // Golden border
-                                borderRadius: '10px', // Rounded corners for the border
-                                opacity: 0, // Initially hidden
+                                width: isMobile ? '80px' : '100px',
+                                height: isMobile ? '80px' : '100px',
+                                border: '5px solid #FFD700',
+                                borderRadius: '10px',
+                                opacity: 0,
                                 animation: 'fadeInImage 0.5s forwards',
-                                animationDelay: '3s', // Delay to appear after the "You have gained:" line
+                                animationDelay: '3s',
                             }}
                         />
                         <Box
                             sx={{
                                 position: 'absolute',
-                                bottom: '-20px', // Positioning the label below the image
+                                bottom: '-20px',
                                 left: '27%',
                                 transform: 'translateX(-50%)',
-                                backgroundColor: '#FFD700', // Golden background
-                                color: 'brown', // Brown text color
+                                backgroundColor: '#FFD700',
+                                color: 'brown',
                                 padding: '5px 10px',
-                                borderRadius: '1px 1px 5px 5px', // Rounded corners for the label
-                                fontSize: '0.8rem',
-                                opacity: 0, // Initially hidden
+                                borderRadius: '1px 1px 5px 5px',
+                                fontSize: isMobile ? '0.7rem' : '0.8rem',
+                                opacity: 0,
                                 animation: 'fadeInImage 0.5s forwards',
-                                animationDelay: '3s', // No delay for label to sync with image
+                                animationDelay: '3s',
                             }}
                         >
                             20XP
@@ -196,29 +174,29 @@ const CompactCelebration = ({ onClose }) => {
                             src="/reward2.jpeg"
                             alt="Reward 2"
                             style={{
-                                width: '100px',
-                                height: '100px',
-                                border: '5px solid #FFD700', // Golden border
-                                borderRadius: '10px', // Rounded corners for the border
-                                opacity: 0, // Initially hidden
+                                width: isMobile ? '80px' : '100px',
+                                height: isMobile ? '80px' : '100px',
+                                border: '5px solid #FFD700',
+                                borderRadius: '10px',
+                                opacity: 0,
                                 animation: 'fadeInImage 0.5s forwards',
-                                animationDelay: '4s', // Delay to appear after the "You have gained:" line
+                                animationDelay: '4s',
                             }}
                         />
                         <Box
                             sx={{
                                 position: 'absolute',
-                                bottom: '-20px', // Positioning the label below the image
+                                bottom: '-20px',
                                 left: '46%',
                                 transform: 'translateX(-50%)',
-                                backgroundColor: '#FFD700', // Golden background
-                                color: 'brown', // Brown text color
+                                backgroundColor: '#FFD700',
+                                color: 'brown',
                                 padding: '5px 10px',
-                                borderRadius: '1px 1px 5px 5px', // Rounded corners for the label
-                                fontSize: '0.8rem',
-                                opacity: 0, // Initially hidden
+                                borderRadius: '1px 1px 5px 5px',
+                                fontSize: isMobile ? '0.7rem' : '0.8rem',
+                                opacity: 0,
                                 animation: 'fadeInImage 0.5s forwards',
-                                animationDelay: '4s', // No delay for label to sync with image
+                                animationDelay: '4s',
                             }}
                         >
                             250,000,000
