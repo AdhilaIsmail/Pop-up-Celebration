@@ -144,14 +144,14 @@ const CompactCelebration = ({ onClose }) => {
                     You have gained:
                 </Typography>
 
-                <Box display="flex" justifyContent="center" alignItems="center" mt={isMobile ? 2 : 4}>
-                    <Box position="relative" marginRight={isMobile ? "10px" : "20px"}>
+                <Box display="flex" justifyContent="center" alignItems="center" mt={isMobile ? 3 : 4}>
+                    <Box position="relative" marginRight={isMobile ? "20px" : "30px"}>
                         <img
                             src="/reward1.jpeg"
                             alt="Reward 1"
                             style={{
-                                width: isMobile ? '80px' : '100px',
-                                height: isMobile ? '80px' : '100px',
+                                width: isMobile ? '120px' : '100px',
+                                height: isMobile ? '120px' : '100px',
                                 border: '5px solid #FFD700',
                                 borderRadius: '10px',
                                 opacity: 0,
@@ -162,17 +162,18 @@ const CompactCelebration = ({ onClose }) => {
                         <Box
                             sx={{
                                 position: 'absolute',
-                                bottom: '-20px',
-                                left: '27%',
+                                bottom: '-30px',
+                                left: '50%',
                                 transform: 'translateX(-50%)',
                                 backgroundColor: '#FFD700',
                                 color: 'brown',
-                                padding: '5px 10px',
+                                padding: isMobile ? '8px 15px':'5px 10px',
                                 borderRadius: '1px 1px 5px 5px',
-                                fontSize: isMobile ? '0.7rem' : '0.8rem',
+                                fontSize: isMobile ? '1rem' : '0.8rem',
                                 opacity: 0,
                                 animation: 'fadeInImage 0.5s forwards',
                                 animationDelay: '3s',
+                                whiteSpace:'nowrap',
                             }}
                         >
                             20XP
@@ -184,29 +185,31 @@ const CompactCelebration = ({ onClose }) => {
                             src="/reward2.jpeg"
                             alt="Reward 2"
                             style={{
-                                width: isMobile ? '80px' : '100px',
-                                height: isMobile ? '80px' : '100px',
+                                width: isMobile ? '120px' : '100px',
+                                height: isMobile ? '120px' : '100px',
                                 border: '5px solid #FFD700',
                                 borderRadius: '10px',
                                 opacity: 0,
                                 animation: 'fadeInImage 0.5s forwards',
-                                animationDelay: '4s',
+                                animationDelay: '3.5s',
                             }}
                         />
                         <Box
                             sx={{
                                 position: 'absolute',
-                                bottom: '-20px',
-                                left: '46%',
+                                bottom: '-30px',
+                                left: '50%',
                                 transform: 'translateX(-50%)',
                                 backgroundColor: '#FFD700',
                                 color: 'brown',
-                                padding: '5px 10px',
+                                padding: isMobile ? '8px 15px':'5px 10px',
                                 borderRadius: '1px 1px 5px 5px',
-                                fontSize: isMobile ? '0.7rem' : '0.8rem',
+                                fontSize: isMobile ? '1rem' : '0.8rem',
+                                fontWeight:'bold',
                                 opacity: 0,
                                 animation: 'fadeInImage 0.5s forwards',
-                                animationDelay: '4s',
+                                animationDelay: '3.5s',
+                                whiteSpace:'nowrap',
                             }}
                         >
                             250,000,000

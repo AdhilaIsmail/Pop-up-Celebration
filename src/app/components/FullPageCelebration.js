@@ -207,6 +207,8 @@ const FullPageCelebration = ({ onClose }) => {
   const [showBadge, setShowBadge] = useState(false);
   const [showClaimButton, setShowClaimButton] = useState(false);
   const audioRef = useRef(null);
+  const [audioPlayed, setAudioPlayed] = useState(false);
+  
 
   useEffect(() => {
     const xpInterval = setInterval(() => {
@@ -236,16 +238,22 @@ const FullPageCelebration = ({ onClose }) => {
   }, []);
 
   useEffect(() => {
-    audioRef.current = new Audio('audio.mp3');
-    audioRef.current.play();
+    //audioRef.current = new Audio('audio.mp3');
+    //audioRef.current.play();
+    if (!audioPlayed) {
+      audioRef.current = new Audio('audio.mp3');
+      audioRef.current.play().then(() => {
+        setAudioPlayed(true);
+      }).catch(error => console.log('Autoplay error:', error));
+    }
 
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-      }
-    };
-  }, []);
+        if (audioRef.current) {
+          audioRef.current.pause();
+          audioRef.current.currentTime = 0;
+        }
+      };
+    }, [audioPlayed]);
 
   const handleOnClose = () => {
     if (audioRef.current) {
