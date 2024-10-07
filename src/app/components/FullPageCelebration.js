@@ -238,22 +238,17 @@ const FullPageCelebration = ({ onClose }) => {
   }, []);
 
   useEffect(() => {
-    //audioRef.current = new Audio('audio.mp3');
-    //audioRef.current.play();
-    if (!audioPlayed) {
-      audioRef.current = new Audio('audio.mp3');
+    audioRef.current = new Audio('/audio.mp3');
+    audioRef.current.volume = 1; // Set volume to 1 (max)
+  
+    if (!audioPlayed && audioRef.current) {
       audioRef.current.play().then(() => {
         setAudioPlayed(true);
-      }).catch(error => console.log('Autoplay error:', error));
+      }).catch(error => {
+        console.log('Autoplay error:', error);
+      });
     }
-
-    return () => {
-        if (audioRef.current) {
-          audioRef.current.pause();
-          audioRef.current.currentTime = 0;
-        }
-      };
-    }, [audioPlayed]);
+  }, [audioPlayed]);
 
   const handleOnClose = () => {
     if (audioRef.current) {
