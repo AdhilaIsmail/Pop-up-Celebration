@@ -40,6 +40,9 @@ const CompactCelebration = ({ onClose }) => {
                     height: isMobile ? '90%' : '80%',
                     maxHeight: '600px',
                     margin: 'auto',
+                    display:'flex',
+                    flexDirection:'column',
+                    justifyContent:'flex-start',
                 },
             }}
         >
@@ -76,11 +79,17 @@ const CompactCelebration = ({ onClose }) => {
                     variant={isMobile ? "h4" : "h3"}
                     sx={{
                         color: '#FFD700',
-                        marginBottom: '0px',
-                        marginTop: isMobile ? '10px' : '20px',
+                        marginBottom: isMobile ? '10px' : '20px',
                         textAlign: 'center',
                         animation: 'congratsAnimation 1s forwards',
-                        fontSize: isMobile ? '1.8rem' : '2.5rem',
+                        fontSize: {
+                            xs: '1.5rem',
+                            sm: '1.8rem',
+                            md: '2.2rem',
+                            lg: '2.5rem',
+                        },
+                        fontWeight: 'bold',
+                        textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
                     }}
                 >
                     Congratulations!
@@ -91,7 +100,7 @@ const CompactCelebration = ({ onClose }) => {
                     sx={{
                         color: '#FFD700',
                         fontSize: isMobile ? '1rem' : '1.3rem',
-                        marginTop: isMobile ? '-20px' : '-35px',
+                        marginBottom: isMobile ? '10px' : '20px',
                         textAlign: 'center',
                         animation: 'fadeInRewardsText 0.5s forwards',
                         animationDelay: '1s',
@@ -105,12 +114,12 @@ const CompactCelebration = ({ onClose }) => {
                     variant="body2"
                     sx={{
                         color: '#edda95',
-                        marginTop: '10px',
+                        marginBottom: isMobile ? '20px' : '30px',
                         textAlign: 'center',
                         padding: isMobile ? '10px' : '15px',
                         fontSize: isMobile ? '0.9rem' : '1.1rem',
                         animation: 'fadeInRewardsText 0.5s forwards',
-                        animationDelay: '2s',
+                        animationDelay: '1.5s',
                         opacity: 0,
                     }}
                 >
@@ -122,9 +131,8 @@ const CompactCelebration = ({ onClose }) => {
                     variant="body2"
                     sx={{
                         color: '#edda95',
-                        marginTop: isMobile ? '20px' : '45px',
+                        marginBottom: isMobile ? '10px' : '20px',
                         textAlign: 'center',
-                        padding: '0px',
                         fontSize: isMobile ? '0.9rem' : '1.1rem',
                         animation: 'fadeInRewardsText 0.5s forwards',
                         animationDelay: '2s',
